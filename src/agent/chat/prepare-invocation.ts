@@ -8,7 +8,7 @@ import type { AgentOptions, MessageRole } from '../types';
 
 export interface PreparedAgentInvocation {
   model: ReturnType<typeof getAgentModel>;
-  backupModel: ReturnType<typeof getBackupAgentModel>;
+  backupModel?: ReturnType<typeof getBackupAgentModel>;
   tools: AgentTools;
   effectiveSystemPrompt: string;
   currentUserPrompt: string;
@@ -25,7 +25,6 @@ export function prepareAgentInvocation(options: AgentOptions): PreparedAgentInvo
     prompt,
     provider,
     modelName,
-    backupModelName,
     apiKey,
     history = [],
     isFirstTurn,
@@ -33,8 +32,8 @@ export function prepareAgentInvocation(options: AgentOptions): PreparedAgentInvo
   } = options;
 
   const tools = getAgentTools();
-  const model = getAgentModel(modelName, apiKey, provider);
-  const backupModel = getBackupAgentModel(backupModelName, apiKey);
+  const model = getAgentModel(provider, apiKey, modelName);
+  const backupModel = getBackupAgentModel(provider);
 
   const currentUserPrompt = prompt;
 

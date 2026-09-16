@@ -89,7 +89,6 @@ export interface AgentOptions {
   symbol?: string;
   provider?: InferenceProviderType;
   modelName?: string;
-  backupModelName?: string;
   apiKey?: string;
   history?: HistoryMessage[];
   maxSteps?: number;

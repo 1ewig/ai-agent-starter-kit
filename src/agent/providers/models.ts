@@ -4,22 +4,16 @@ import { wrapLanguageModel, extractReasoningMiddleware } from 'ai';
 import {
   type InferenceProviderType,
   DEFAULT_FIREWORKS_MODEL,
-  DEFAULT_FIREWORKS_BACKUP_MODEL,
+  DEFAULT_OPENAI_MODEL,
 } from './config';
 
-const ERR_MISSING_FIREWORKS_KEY =
-  'FIREWORKS_API_KEY environment variable is not configured. Please set your Fireworks API key in .env.local.';
-const ERR_MISSING_OPENAI_KEY =
-  'OPENAI_API_KEY environment variable is not configured. Please set your OpenAI API key in .env.local.';
-
 /**
- * Resolves the active inference provider from options or environment variables
+ * Resolves the active inference provider from override or environment variables
  */
 export function getActiveInferenceProvider(override?: InferenceProviderType): InferenceProviderType {
   if (override) return override;
   const envProvider = process.env.INFERENCE_PROVIDER?.toLowerCase();
-  if (envProvider === 'openai') return 'openai';
-  return 'fireworks';
+  return envProvider === 'openai' ? 'openai' : 'fireworks';
 }
 
 /**
@@ -33,57 +27,44 @@ export function wrapModelWithThinking<T extends Parameters<typeof wrapLanguageMo
 }
 
 /**
- * Returns a configured model instance for agent reasoning and tool dispatch
+ * Returns a configured model instance for the specified or active provider
  */
 export function getAgentModel(
-  modelName?: string,
+  providerOverride?: InferenceProviderType,
   apiKey?: string,
-  providerOverride?: InferenceProviderType
+  modelName?: string
 ) {
   const provider = getActiveInferenceProvider(providerOverride);
 
   if (provider === 'openai') {
-    const resolvedApiKey = apiKey ?? process.env.OPENAI_API_KEY;
-    if (!resolvedApiKey) {
-      throw new Error(ERR_MISSING_OPENAI_KEY);
-    }
-    const openai = createOpenAI({ apiKey: resolvedApiKey });
-    const selectedModel = modelName ?? process.env.OPENAI_MODEL ?? 'gpt-4o';
-    return wrapModelWithThinking(openai(selectedModel));
+    const key = apiKey ?? process.env.OPENAI_API_KEY;
+    if (!key) throw new Error('OPENAI_API_KEY is not configured in .env.local');
+    const openai = createOpenAI({ apiKey: key });
+    return wrapModelWithThinking(openai(modelName ?? process.env.OPENAI_MODEL ?? DEFAULT_OPENAI_MODEL));
   }
 
-  // Default to Fireworks
-  const resolvedApiKey = apiKey ?? process.env.FIREWORKS_API_KEY;
-  if (!resolvedApiKey) {
-    throw new Error(ERR_MISSING_FIREWORKS_KEY);
-  }
-  const fireworks = createFireworks({ apiKey: resolvedApiKey });
-  const selectedModel = modelName ?? process.env.FIREWORKS_MODEL ?? DEFAULT_FIREWORKS_MODEL;
-  return wrapModelWithThinking(fireworks(selectedModel));
+  const key = apiKey ?? process.env.FIREWORKS_API_KEY;
+  if (!key) throw new Error('FIREWORKS_API_KEY is not configured in .env.local');
+  const fireworks = createFireworks({ apiKey: key });
+  return wrapModelWithThinking(fireworks(modelName ?? process.env.FIREWORKS_MODEL ?? DEFAULT_FIREWORKS_MODEL));
 }
 
 /**
- * Returns the configured backup model instance for automatic failover
+ * Returns a backup model instance on the alternative provider if available
  */
-export function getBackupAgentModel(
-  backupModelName?: string,
-  apiKey?: string,
-  backupProviderOverride?: InferenceProviderType
-) {
-  const backupProvider = backupProviderOverride ?? getActiveInferenceProvider();
+export function getBackupAgentModel(primaryProviderOverride?: InferenceProviderType) {
+  const primaryProvider = getActiveInferenceProvider(primaryProviderOverride);
+  const backupProvider: InferenceProviderType = primaryProvider === 'fireworks' ? 'openai' : 'fireworks';
 
   if (backupProvider === 'openai') {
-    const resolvedApiKey = apiKey ?? process.env.OPENAI_API_KEY;
-    if (!resolvedApiKey) return undefined;
-    const openai = createOpenAI({ apiKey: resolvedApiKey });
-    const selectedModel = backupModelName ?? process.env.OPENAI_BACKUP_MODEL ?? 'gpt-4o-mini';
-    return wrapModelWithThinking(openai(selectedModel));
+    const key = process.env.OPENAI_API_KEY;
+    if (!key) return undefined;
+    const openai = createOpenAI({ apiKey: key });
+    return wrapModelWithThinking(openai(process.env.OPENAI_MODEL ?? DEFAULT_OPENAI_MODEL));
   }
 
-  // Fireworks backup
-  const resolvedApiKey = apiKey ?? process.env.FIREWORKS_API_KEY;
-  if (!resolvedApiKey) return undefined;
-  const fireworks = createFireworks({ apiKey: resolvedApiKey });
-  const selectedModel = backupModelName ?? process.env.FIREWORKS_BACKUP_MODEL ?? DEFAULT_FIREWORKS_BACKUP_MODEL;
-  return wrapModelWithThinking(fireworks(selectedModel));
+  const key = process.env.FIREWORKS_API_KEY;
+  if (!key) return undefined;
+  const fireworks = createFireworks({ apiKey: key });
+  return wrapModelWithThinking(fireworks(process.env.FIREWORKS_MODEL ?? DEFAULT_FIREWORKS_MODEL));
 }
