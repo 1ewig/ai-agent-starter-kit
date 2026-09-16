@@ -4,23 +4,25 @@
  * Enforces smooth, soft, and subtle animations across:
  * - Work process timeline accordion (AgentProcessTimeline)
  * - Thought reasoning accordion (AgentThoughtAccordion)
- * - Tool invocation detail drawers (ToolResultCard drawer)
- * - Empty chat state staggered cascade (ChatClient)
+ * - Ambient floating background meshes & edge breathing glows
+ * - Dual-point orbiting chat input aura
+ * - Staggered layout entrances and tactile interaction scales
  */
 
-import type { Variants } from 'framer-motion';
+import type { Variants, TargetAndTransition, Transition } from 'framer-motion';
 
 /**
- * Architectural deceleration cubic bezier curve.
+ * Architectural cubic bezier deceleration curve.
  * Starts smoothly and settles gently into place without bounce or jitter.
  */
 export const EASING_ARCHITECTURAL = [0.16, 1, 0.3, 1] as const;
 
+/* ==========================================================================
+   1. LAYOUT & ACCORDION EXPANSION VARIANTS
+   ========================================================================== */
+
 /**
- * Smooth, jitter-free height and opacity collapse/expand variants for:
- * 1. Overarching work process timeline group
- * 2. Dedicated agent thought accordion
- * 3. Nested tool execution detail drawers
+ * Smooth, jitter-free height and opacity collapse/expand variants for accordions & detail drawers.
  */
 export const accordionVariants: Variants = {
   collapsed: {
@@ -42,212 +44,7 @@ export const accordionVariants: Variants = {
 };
 
 /**
- * Soft, subtle entrance and exit animation for popover dropdown menus
- * Uses a gentle scale (0.98 -> 1) and 6px vertical translation anchored to transform-origin top-right.
- */
-export const dropdownMenuVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.98,
-    y: -6,
-    transition: {
-      duration: 0.16,
-      ease: 'easeOut',
-    },
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.22,
-      ease: EASING_ARCHITECTURAL,
-    },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.98,
-    y: -4,
-    transition: {
-      duration: 0.14,
-      ease: 'easeIn',
-    },
-  },
-};
-
-/**
- * Subtle staggered container for the empty chat suggestions interface.
- * Coordinates entrance with deliberate pacing.
- */
-export const emptyStateContainerVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.35,
-      ease: EASING_ARCHITECTURAL,
-      staggerChildren: 0.07,
-      delayChildren: 0.04,
-    },
-  },
-};
-
-/**
- * Brand mark / icon entrance with soft scale and subtle blur dissipation.
- */
-export const emptyStateIconVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.82, filter: 'blur(4px)' },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    filter: 'blur(0px)',
-    transition: {
-      duration: 0.4,
-      ease: EASING_ARCHITECTURAL,
-    },
-  },
-};
-
-/**
- * Text entrance with cinematic optical blur dissipation and upward drift.
- */
-export const emptyStateTextVariants: Variants = {
-  hidden: { opacity: 0, y: 12, filter: 'blur(6px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: {
-      duration: 0.42,
-      ease: EASING_ARCHITECTURAL,
-    },
-  },
-};
-
-/**
- * Hero input dock entrance with smooth elevation and blur dissipation.
- */
-export const emptyStateInputVariants: Variants = {
-  hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: {
-      duration: 0.44,
-      ease: EASING_ARCHITECTURAL,
-    },
-  },
-};
-
-/**
- * Staggered container for quick-action pills.
- */
-export const emptyStatePillsContainerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.02,
-    },
-  },
-};
-
-/**
- * Individual quick-action pill badge entrance.
- */
-export const emptyStatePillItemVariants: Variants = {
-  hidden: { opacity: 0, y: 10, scale: 0.94 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.32,
-      ease: EASING_ARCHITECTURAL,
-    },
-  },
-};
-
-/**
- * Smooth backdrop fade and modal scale variants for confirm dialogs.
- */
-export const modalBackdropVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.18, ease: 'easeOut' },
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.14, ease: 'easeIn' },
-  },
-};
-
-export const modalContentVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.95,
-    y: 8,
-    transition: { duration: 0.16, ease: 'easeOut' },
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { duration: 0.22, ease: EASING_ARCHITECTURAL },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.96,
-    y: 6,
-    transition: { duration: 0.14, ease: 'easeIn' },
-  },
-};
-
-/**
- * Tactile touch and press feedback configurations for interactive buttons, icons, and accordions.
- * Provides immediate physical responsiveness across mouse clicks and mobile touch interactions.
- */
-export const tapScaleIcon = {
-  scale: 0.88,
-  transition: { duration: 0.08, ease: 'easeOut' },
-} as const;
-
-export const tapScaleAccordion = {
-  scale: 0.98,
-  transition: { duration: 0.1, ease: 'easeOut' },
-} as const;
-
-export const tapScalePill = {
-  scale: 0.96,
-  transition: { duration: 0.1, ease: 'easeOut' },
-} as const;
-
-export const hoverLiftPill = {
-  y: -1,
-  transition: { duration: 0.15, ease: 'easeOut' },
-} as const;
-
-export const hoverScaleIcon = {
-  scale: 1.05,
-  transition: { duration: 0.12, ease: 'easeOut' },
-} as const;
-
-/**
- * Buttery smooth 60/120fps easing parameters for Left Sidebar width collapse and expansion.
- * Uses architectural cubic-bezier deceleration for fluid, zero-jitter transitions.
- */
-export const sidebarSpringTransition = {
-  duration: 0.28,
-  ease: EASING_ARCHITECTURAL,
-} as const;
-
-/**
  * Clean width and opacity collapse for sidebar item labels and action containers.
- * Fades opacity out quickly on collapse to prevent text squishing, and fades in gently on expand.
  */
 export const sidebarHorizontalCollapseVariants: Variants = {
   collapsed: {
@@ -299,7 +96,105 @@ export const sidebarHeadingCollapseVariants: Variants = {
 };
 
 /**
- * Smooth entrance animation for chat message bubbles and active drafting indicators.
+ * Smooth transition configuration for Left Sidebar width changes.
+ */
+export const sidebarSpringTransition: Transition = {
+  duration: 0.28,
+  ease: EASING_ARCHITECTURAL,
+};
+
+/* ==========================================================================
+   2. STAGGERED ENTRANCES & DIALOG VARIANTS
+   ========================================================================== */
+
+/**
+ * Generic staggered orchestrator for empty state and pill groups.
+ */
+export const emptyStateContainerVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: EASING_ARCHITECTURAL,
+      staggerChildren: 0.06,
+      delayChildren: 0.03,
+    },
+  },
+};
+
+export const emptyStatePillsContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.02,
+    },
+  },
+};
+
+/**
+ * Unified subtle upward drift & fade entrance for empty state child elements.
+ */
+export const emptyStateItemVariants: Variants = {
+  hidden: { opacity: 0, y: 10, filter: 'blur(4px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.36,
+      ease: EASING_ARCHITECTURAL,
+    },
+  },
+};
+
+// Aliases for component convenience & backward compatibility
+export const emptyStateIconVariants = emptyStateItemVariants;
+export const emptyStateTextVariants = emptyStateItemVariants;
+export const emptyStateInputVariants = emptyStateItemVariants;
+export const emptyStatePillItemVariants = emptyStateItemVariants;
+
+/**
+ * Modal backdrop and dialog container transitions.
+ */
+export const modalBackdropVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.18, ease: 'easeOut' },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.14, ease: 'easeIn' },
+  },
+};
+
+export const modalContentVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+    y: 8,
+    transition: { duration: 0.16, ease: 'easeOut' },
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.22, ease: EASING_ARCHITECTURAL },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.96,
+    y: 6,
+    transition: { duration: 0.14, ease: 'easeIn' },
+  },
+};
+
+/**
+ * Chat message bubble entrance transition.
  */
 export const messageEntranceVariants: Variants = {
   hidden: { opacity: 0, y: 6 },
@@ -328,17 +223,33 @@ export const iconSwapVariants: Variants = {
   exit: { scale: 0.6, opacity: 0, transition: { duration: 0.15 } },
 };
 
-/**
- * Smooth, soft entrance animation for high-level primary page views.
- */
-export const pageEntranceVariants: Variants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.25, ease: EASING_ARCHITECTURAL },
-  },
+/* ==========================================================================
+   3. TACTILE TOUCH & HOVER MICRO-INTERACTIONS
+   ========================================================================== */
+
+export const tapScaleIcon: TargetAndTransition = {
+  scale: 0.88,
+  transition: { duration: 0.08, ease: 'easeOut' },
 };
 
+export const tapScaleAccordion: TargetAndTransition = {
+  scale: 0.98,
+  transition: { duration: 0.1, ease: 'easeOut' },
+};
+
+export const tapScalePill: TargetAndTransition = {
+  scale: 0.96,
+  transition: { duration: 0.1, ease: 'easeOut' },
+};
+
+export const hoverLiftPill: TargetAndTransition = {
+  y: -1,
+  transition: { duration: 0.15, ease: 'easeOut' },
+};
+
+export const hoverScaleIcon: TargetAndTransition = {
+  scale: 1.05,
+  transition: { duration: 0.12, ease: 'easeOut' },
+};
 
 

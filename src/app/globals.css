@@ -43,11 +43,6 @@
   --spacing-md: 1rem;     /* 16px - Standard internal card padding */
   --spacing-lg: 1.5rem;   /* 24px - Grid gutters & module spacing */
   --spacing-xl: 2.5rem;   /* 40px - Large dashboard deck framing */
-
-  /* ==========================================================================
-     4. LAYOUT DIMENSIONS
-     ========================================================================== */
-  --navbar-height: 3.5rem; /* 56px - Architectural top navigation bar height */
 }
 
 /* Light Theme Overrides (Nordic Opal & Electric Cerulean) */
@@ -98,12 +93,20 @@ html.light {
   --text-2xl: var(--text-2xl);
   --text-3xl: var(--text-3xl);
 
-  --spacing-navbar: var(--navbar-height);
   --spacing-spacing-xs: var(--spacing-xs);
   --spacing-spacing-sm: var(--spacing-sm);
   --spacing-spacing-md: var(--spacing-md);
   --spacing-spacing-lg: var(--spacing-lg);
   --spacing-spacing-xl: var(--spacing-xl);
+}
+
+/* Base Body Styles */
+body {
+  background: var(--theme-bg-base);
+  color: var(--theme-text-primary);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.025em;
+  overflow: hidden;
 }
 
 /* Custom subtle scrollbars */
@@ -139,13 +142,6 @@ html.light {
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(150, 150, 150, 0.4);
-}
-
-/* Touch responsiveness and mobile tap highlight elimination */
-button,
-[role="button"] {
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
 
 /* Ambient Background & Floating Blobs for Empty Chat State */
@@ -357,12 +353,11 @@ button,
   will-change: transform;
 }
 
-body {
-  background: var(--theme-bg-base);
-  color: var(--theme-text-primary);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  letter-spacing: -0.025em;
-  overflow: hidden;
+/* Touch responsiveness and mobile tap highlight elimination */
+button,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 /* KaTeX Theme Integration & Responsive Math Handling */
