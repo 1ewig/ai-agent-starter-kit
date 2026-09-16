@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/fireworks": "^3.0.46",
-    "@ai-sdk/openai": "^4.0.66",
+    "@ai-sdk/groq": "^4.0.42",
     "@types/katex": "^0.16.8",
     "ai": "^7.0.90",
     "clsx": "^2.1.1",

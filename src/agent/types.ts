@@ -121,6 +121,7 @@ export interface AgentResult {
 export const AgentChatRequestSchema = z.object({
   message: z.string().min(1, 'Message is required'),
   symbol: z.string().optional(),
+  provider: z.enum(['fireworks', 'groq']).optional(),
   apiKey: z.string().optional(),
   history: z.array(HistoryMessageSchema).optional(),
   isFirstTurn: z.boolean().optional(),

@@ -76,7 +76,7 @@ export async function executeAgentStream(
           ? { reasoningEffort }
           : {}),
       },
-      openai:
+      groq:
         reasoningEffort !== 'none' && reasoningEffort !== 'default'
           ? { reasoningEffort }
           : {},

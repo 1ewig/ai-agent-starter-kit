@@ -1,10 +1,10 @@
 import { createFireworks } from '@ai-sdk/fireworks';
-import { createOpenAI } from '@ai-sdk/openai';
+import { createGroq } from '@ai-sdk/groq';
 import { wrapLanguageModel, extractReasoningMiddleware } from 'ai';
 import {
   type InferenceProviderType,
   DEFAULT_FIREWORKS_MODEL,
-  DEFAULT_OPENAI_MODEL,
+  DEFAULT_GROQ_MODEL,
 } from './config';
 
 /**
@@ -13,7 +13,7 @@ import {
 export function getActiveInferenceProvider(override?: InferenceProviderType): InferenceProviderType {
   if (override) return override;
   const envProvider = process.env.INFERENCE_PROVIDER?.toLowerCase();
-  return envProvider === 'openai' ? 'openai' : 'fireworks';
+  return envProvider === 'groq' ? 'groq' : 'fireworks';
 }
 
 /**
@@ -36,11 +36,11 @@ export function getAgentModel(
 ) {
   const provider = getActiveInferenceProvider(providerOverride);
 
-  if (provider === 'openai') {
-    const key = apiKey ?? process.env.OPENAI_API_KEY;
-    if (!key) throw new Error('OPENAI_API_KEY is not configured in .env.local');
-    const openai = createOpenAI({ apiKey: key });
-    return wrapModelWithThinking(openai(modelName ?? process.env.OPENAI_MODEL ?? DEFAULT_OPENAI_MODEL));
+  if (provider === 'groq') {
+    const key = apiKey ?? process.env.GROQ_API_KEY;
+    if (!key) throw new Error('GROQ_API_KEY is not configured in .env.local');
+    const groq = createGroq({ apiKey: key });
+    return wrapModelWithThinking(groq(modelName ?? process.env.GROQ_MODEL ?? DEFAULT_GROQ_MODEL));
   }
 
   const key = apiKey ?? process.env.FIREWORKS_API_KEY;
@@ -54,13 +54,13 @@ export function getAgentModel(
  */
 export function getBackupAgentModel(primaryProviderOverride?: InferenceProviderType) {
   const primaryProvider = getActiveInferenceProvider(primaryProviderOverride);
-  const backupProvider: InferenceProviderType = primaryProvider === 'fireworks' ? 'openai' : 'fireworks';
+  const backupProvider: InferenceProviderType = primaryProvider === 'fireworks' ? 'groq' : 'fireworks';
 
-  if (backupProvider === 'openai') {
-    const key = process.env.OPENAI_API_KEY;
+  if (backupProvider === 'groq') {
+    const key = process.env.GROQ_API_KEY;
     if (!key) return undefined;
-    const openai = createOpenAI({ apiKey: key });
-    return wrapModelWithThinking(openai(process.env.OPENAI_MODEL ?? DEFAULT_OPENAI_MODEL));
+    const groq = createGroq({ apiKey: key });
+    return wrapModelWithThinking(groq(process.env.GROQ_MODEL ?? DEFAULT_GROQ_MODEL));
   }
 
   const key = process.env.FIREWORKS_API_KEY;
@@ -68,3 +68,5 @@ export function getBackupAgentModel(primaryProviderOverride?: InferenceProviderT
   const fireworks = createFireworks({ apiKey: key });
   return wrapModelWithThinking(fireworks(process.env.FIREWORKS_MODEL ?? DEFAULT_FIREWORKS_MODEL));
 }
+
+
