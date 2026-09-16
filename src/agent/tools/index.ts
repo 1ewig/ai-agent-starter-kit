@@ -1,12 +1,10 @@
 import { webSearchTool } from './web-search';
-import { newsBriefingTool } from './news-briefing';
 
 /**
- * Registry of active agent tools (Web Search & Real-time News Briefing via Exa AI).
+ * Registry of active agent tools (Real-time Neural Web Search & Research via Exa AI).
  */
 export const agentTools = {
   web_search: webSearchTool,
-  news_briefing: newsBriefingTool,
 };
 
 export type AgentTools = typeof agentTools;
@@ -20,5 +18,4 @@ export function getAgentTools(): AgentTools {
 
 export {
   webSearchTool,
-  newsBriefingTool,
 };

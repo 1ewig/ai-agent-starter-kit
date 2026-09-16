@@ -127,36 +127,3 @@ export const AgentChatRequestSchema = z.object({
 });
 
 export type AgentChatRequest = z.infer<typeof AgentChatRequestSchema>;
-
-/**
- * News Briefing Intelligence Payload
- */
-export interface NewsBriefingItem {
-  id?: string;
-  title: string;
-  url: string;
-  publishedDate?: string;
-  sourceDomain?: string;
-  summary?: string;
-  highlights?: string[];
-}
-
-export interface NewsBriefingData {
-  success: boolean;
-  source: string;
-  topic: string;
-  totalResults: number;
-  headlines: NewsBriefingItem[];
-  summary: string;
-  warning?: string;
-  actionableGuidance?: string;
-}
-
-/**
- * Zod schemas for tool parameters
- */
-export const newsBriefingParamsSchema = z.object({
-  symbol: z.string().optional().describe('Asset or ticker to scope news (e.g. BTC, ETH, SOL, NVDA)'),
-  topic: z.string().default('market news').describe('News topic, catalyst, or theme (e.g. "ETF inflows", "Fed rate cut", "regulation")'),
-  limit: z.number().min(2).max(8).default(4).describe('Number of top headlines to retrieve (default 4)'),
-});

@@ -3,7 +3,6 @@
 import React from 'react';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import { WebSearchCard } from './web-search-card';
-import { NewsBriefingCard } from './news-briefing-card';
 import type { ToolDisplayInfo, ToolResultCardProps } from './types';
 import { getToolDisplayInfo } from './display-info';
 
@@ -42,9 +41,6 @@ export const ToolResultCard = React.memo(function ToolResultCard({
     }
 
     switch (toolName) {
-      case 'news_briefing':
-        return <NewsBriefingCard resultObj={resultObj} />;
-
       case 'web_search':
       case 'search_crypto_news':
         return <WebSearchCard resultObj={resultObj} />;
