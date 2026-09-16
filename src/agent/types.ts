@@ -86,7 +86,6 @@ export type AgentStreamEvent =
  */
 export interface AgentOptions {
   prompt: string;
-  symbol?: string;
   provider?: InferenceProviderType;
   modelName?: string;
   apiKey?: string;
@@ -102,7 +101,6 @@ export interface AgentOptions {
  * Structured result returned by the agent execution engine
  */
 export interface AgentResult {
-  symbol?: string;
   sessionTitle?: string;
   analysis: string;
   followUpQuestions?: string[];
@@ -120,7 +118,6 @@ export interface AgentResult {
  */
 export const AgentChatRequestSchema = z.object({
   message: z.string().min(1, 'Message is required'),
-  symbol: z.string().optional(),
   provider: z.enum(['fireworks', 'groq']).optional(),
   apiKey: z.string().optional(),
   history: z.array(HistoryMessageSchema).optional(),

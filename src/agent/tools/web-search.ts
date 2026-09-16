@@ -7,11 +7,10 @@ import { searchExa, ExaSearchInputSchema } from '@/lib/exa';
  */
 export const webSearchTool = tool({
   description:
-    'Search the web using Exa AI for real-time information, recent news, market analysis, technical documentation, or research. Supports date filters and domain restrictions. Call whenever you need current external news or catalyst information.',
+    'Search the web using Exa AI for real-time information, recent news, research, technical documentation, or any current external context. Supports date filters and domain restrictions. Call whenever you need up-to-date or factual information.',
   inputSchema: ExaSearchInputSchema,
   execute: async ({
     query,
-    symbol,
     category = 'general',
     startPublishedDate,
     endPublishedDate,
@@ -21,7 +20,7 @@ export const webSearchTool = tool({
     highlightsPerUrl = 2,
   }) => {
     try {
-      const searchQuery = symbol ? `${symbol} ${query}`.trim() : query.trim();
+      const searchQuery = query.trim();
       const searchRes = await searchExa({
         query: searchQuery,
         type: 'auto',
@@ -58,7 +57,7 @@ export const webSearchTool = tool({
         success: false,
         error: rawError,
         actionableGuidance: isKeyMissing
-          ? 'EXA_API_KEY is not configured in .env.local. Real-time web search is unavailable, but all live market data, 23 technical indicators, macro analysis, and sentiment tools run out-of-the-box without keys. Proceed using market_data, technical_analysis, macro_analyst, or sentiment_analyst.'
+          ? 'EXA_API_KEY is not configured in .env.local. Real-time web search is unavailable for this run. Answer with the knowledge you already have, clearly flagging any caveats.'
           : 'Web search encountered an error. If you used strict date or domain filters, try removing them and searching with broader terms.',
       };
     }

@@ -329,7 +329,7 @@ export const iconSwapVariants: Variants = {
 };
 
 /**
- * Smooth, soft entrance animation for high-level page views (Portfolio, Orders).
+ * Smooth, soft entrance animation for high-level primary page views.
  */
 export const pageEntranceVariants: Variants = {
   hidden: { opacity: 0, y: 8 },

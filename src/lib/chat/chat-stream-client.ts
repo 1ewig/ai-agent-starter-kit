@@ -5,7 +5,6 @@ export interface StreamAgentChatParams {
   message: string;
   history: ChatHistoryMessage[];
   isFirstTurn: boolean;
-  symbol?: string;
   signal?: AbortSignal;
   onEvent: (event: AgentStreamEvent) => void | Promise<void>;
 }
@@ -18,7 +17,6 @@ export async function streamAgentChat({
   message,
   history,
   isFirstTurn,
-  symbol,
   signal,
   onEvent,
 }: StreamAgentChatParams): Promise<AgentResult | null> {
@@ -31,7 +29,6 @@ export async function streamAgentChat({
       message,
       history,
       isFirstTurn,
-      symbol,
     }),
     signal,
   });

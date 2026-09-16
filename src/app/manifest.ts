@@ -3,10 +3,10 @@ import { BRAND_THEME } from '@/constants/theme';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Sterling AI Trading Desk',
+    name: 'Sterling — AI Agent & Research Assistant',
     short_name: 'Sterling',
     description:
-      'Institutional AI Trading Desk & Cross-Asset Intelligence Workbench for continuous crypto and tokenized US equities trading.',
+      'A general-purpose AI research assistant with real-time web search, multi-step reasoning, and instant responses.',
     start_url: '/chat',
     display: 'standalone',
     background_color: BRAND_THEME.BG_HEX,

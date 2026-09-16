@@ -25,10 +25,10 @@ export default function RouteError({ error, reset }: RouteErrorProps) {
 
         {/* Title & Description */}
         <h1 className="text-lg sm:text-xl font-extrabold text-theme-text-primary tracking-tight">
-          Desk View Interrupted
+          Something Went Wrong
         </h1>
         <p className="text-xs sm:text-sm text-theme-text-secondary mt-2">
-          An unexpected error occurred while rendering this market view. You can reload this segment or return to the main trading desk.
+          An unexpected error occurred while rendering this page. You can reload this segment or return to the chat.
         </p>
 
         {/* Diagnostic Error Box */}
@@ -58,7 +58,7 @@ export default function RouteError({ error, reset }: RouteErrorProps) {
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-theme-bg-elevated hover:bg-theme-bg-surface border border-theme-border-subtle hover:border-theme-border-strong text-theme-text-primary font-semibold text-xs transition-colors cursor-pointer select-none"
           >
             <Bot className="size-3.5 text-theme-text-secondary" />
-            <span>Return to Desk Chat</span>
+            <span>Return to Chat</span>
           </Link>
 
           <button

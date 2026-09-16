@@ -23,7 +23,7 @@ export interface ExaSearchResponse {
 }
 
 /**
- * Parameters for executing a crypto news or web search via Exa
+ * Parameters for executing an intelligent web search via Exa
  */
 export interface ExaSearchOptions {
   query: string;
@@ -73,15 +73,7 @@ export const ExaSearchInputSchema = z
         (val) => !/([a-zA-Z0-9])\1{7,}/i.test(val),
         { message: 'Search query contains repetitive character patterns or invalid keyboard mash.' }
       )
-      .describe('Natural language search query for news, catalysts, events, or crypto narratives'),
-    symbol: z
-      .string()
-      .trim()
-      .min(2, 'Symbol must be at least 2 characters')
-      .max(20, 'Symbol cannot exceed 20 characters')
-      .regex(/^[A-Za-z0-9/_-]+$/, 'Trading symbol must be alphanumeric (e.g. SOL, BTC, ETH, SOLUSDT)')
-      .optional()
-      .describe('Optional trading symbol context (e.g. SOL, BTC, ETH, SOLUSDT)'),
+      .describe('Natural language search query for news, developments, events, facts, or research topics'),
     category: z
       .enum(['news', 'company', 'financial report', 'research paper', 'general'])
       .default('news')
@@ -104,7 +96,7 @@ export const ExaSearchInputSchema = z
     includeDomains: z
       .array(z.string().trim().min(3))
       .optional()
-      .describe('Optional list of authoritative domains to restrict search to (e.g. ["coindesk.com", "theblock.co"])'),
+      .describe('Optional list of authoritative domains to restrict search to (e.g. ["arxiv.org", "github.com"])'),
     numResults: z
       .coerce
       .number({ message: 'numResults must be a number' })

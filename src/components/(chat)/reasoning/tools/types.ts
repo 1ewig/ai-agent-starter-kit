@@ -3,7 +3,6 @@ import React from 'react';
 export interface ToolDisplayInfo {
   title: string;
   icon: React.ComponentType<{ className?: string }>;
-  symbol?: string;
 }
 
 export interface ToolCardProps {

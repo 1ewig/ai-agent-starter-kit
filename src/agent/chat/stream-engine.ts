@@ -15,7 +15,7 @@ export async function executeAgentStream(
   options: AgentOptions,
   onEvent: (event: AgentStreamEvent) => void
 ): Promise<AgentResult> {
-  const { maxSteps = 5, symbol, abortSignal } = options;
+  const { maxSteps = 5, abortSignal } = options;
   const {
     model,
     backupModel,
@@ -49,9 +49,7 @@ export async function executeAgentStream(
   const stateMachine = new AgentStreamStateMachine(handleEvent);
 
   if (process.env.NODE_ENV !== 'production') {
-    console.log(
-      `\n🤖 [Sterling:ChatAgent] Started | Symbol: ${symbol ?? 'GLOBAL'} | MaxSteps: ${maxSteps}`
-    );
+    console.log(`\n🤖 [Sterling:ChatAgent] Started | MaxSteps: ${maxSteps}`);
     console.log(
       `   Prompt: "${options.prompt.slice(0, 100)}${options.prompt.length > 100 ? '...' : ''}"`
     );
@@ -227,7 +225,6 @@ export async function executeAgentStream(
   const workedDurationMs = Math.max(1000, Date.now() - startTime);
 
   const finalResult: AgentResult = {
-    symbol: symbol?.toUpperCase(),
     sessionTitle,
     analysis: cleanAnalysis,
     followUpQuestions,

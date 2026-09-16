@@ -42,7 +42,6 @@ export const ToolResultCard = React.memo(function ToolResultCard({
 
     switch (toolName) {
       case 'web_search':
-      case 'search_crypto_news':
         return <WebSearchCard resultObj={resultObj} />;
 
       default: {

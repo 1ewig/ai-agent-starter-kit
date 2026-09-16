@@ -12,7 +12,6 @@ const NAVIGATION_CHROME_PATTERNS = [
   /^watch live/i,
   /^listen live/i,
   /^live tv/i,
-  /^markets/i,
   /^cookie (policy|settings|notice|consent)/i,
   /^all rights reserved/i,
   /^terms (of service|& conditions|of use)/i,
@@ -52,7 +51,7 @@ function sanitizeHighlights(rawHighlights?: string[]): string[] {
 }
 
 /**
- * Executes an intelligent semantic web search or crypto news query via the Exa AI REST API.
+ * Executes an intelligent semantic web search via the Exa AI REST API.
  * Uses search mode 'auto' with customizable category, date ranges, domain scoping, and token-optimized highlights.
  * 
  * @param options - Configurable search parameters with robust defaults

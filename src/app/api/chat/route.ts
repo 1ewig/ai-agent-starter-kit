@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { message, symbol, provider, apiKey, history, isFirstTurn } = parseResult.data;
+    const { message, provider, apiKey, history, isFirstTurn } = parseResult.data;
 
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
@@ -32,7 +32,6 @@ export async function POST(req: Request) {
           await executeAgentStream(
             {
               prompt: message,
-              symbol,
               provider,
               apiKey,
               history,
