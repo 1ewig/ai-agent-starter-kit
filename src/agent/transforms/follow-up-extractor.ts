@@ -8,20 +8,20 @@ export interface ExtractedFollowUpsResult {
 }
 
 const FALLBACK_FOLLOW_UPS = [
-  'Analyze current market sentiment and funding rates',
-  'Check key support, resistance, and invalidation levels',
-  'Cross-reference macro catalysts and Treasury yield curve impact',
+  'Explore this topic in greater detail',
+  'Provide practical code or architecture examples',
+  'Summarize the core takeaways and next steps',
 ];
 
 /**
- * Returns 3 intelligent fallback follow-up questions.
+ * Returns 3 intelligent fallback follow-up actions.
  */
 function getFallbackFollowUpQuestions(): string[] {
   return [...FALLBACK_FOLLOW_UPS];
 }
 
 /**
- * Extracts exactly 3 follow-up questions from the agent output and strips <follow_up_questions> markup.
+ * Extracts exactly 3 follow-up suggestions from the agent output and strips <follow_up_questions> markup.
  */
 export function extractFollowUpQuestions(rawText: string): ExtractedFollowUpsResult {
   const match = rawText.match(/<follow_up_questions>([\s\S]*?)<\/follow_up_questions>/i);

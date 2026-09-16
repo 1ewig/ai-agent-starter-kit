@@ -29,40 +29,19 @@ export interface ExtractedTitleResult {
  */
 export function generateFallbackSessionTitle(prompt: string): string {
   const cleanPrompt = (prompt || '').trim();
+  if (!cleanPrompt) return 'New Conversation';
 
-  const matchedCoin =
-    cleanPrompt.toUpperCase().match(/\b(BTC|ETH|SOL|BNB|XRP|DOGE|ADA|AVAX|LINK|SUI|PEPE|SHIB|NEAR|APT|RENDER|TAO|FET|ARB|OP|DOT)\b/)?.[1];
+  const cleanedWords = cleanPrompt
+    .replace(/[^\w\s-]/g, '')
+    .split(/\s+/)
+    .filter(Boolean);
 
-  const coinPrefix = matchedCoin ? `${matchedCoin} ` : '';
+  if (cleanedWords.length === 0) return 'New Conversation';
 
-  if (/\b(PRICE|HOW MUCH|WORTH|VALUE|COST)\b/i.test(cleanPrompt)) {
-    return coinPrefix ? `${coinPrefix}Price Check` : 'Market Price Check';
-  }
-  if (/\b(DEPTH|ORDER BOOK|BIDS?|ASKS?|WALLS?|SPREAD|SLIPPAGE)\b/i.test(cleanPrompt)) {
-    return coinPrefix ? `${coinPrefix}Order Book Depth` : 'Order Book Liquidity';
-  }
-  if (/\b(FUNDING|RATES?|OI|OPEN INTEREST|LONG|SHORT|RATIO)\b/i.test(cleanPrompt)) {
-    return coinPrefix ? `${coinPrefix}Funding & Sentiment` : 'Futures Sentiment';
-  }
-  if (/\b(NEWS|CATALYST|EVENT|WHY|PUMP|DUMP|UPDATE)\b/i.test(cleanPrompt)) {
-    return coinPrefix ? `${coinPrefix}News & Drivers` : 'Market News & Catalysts';
-  }
-  if (/\b(STATS|24H|VOLUME|HIGH|LOW|CHANGE|PERFORMANCE)\b/i.test(cleanPrompt)) {
-    return coinPrefix ? `${coinPrefix}24h Market Stats` : '24h Market Stats';
-  }
-  if (/\b(KLINES?|CANDLES?|CHART|TREND|EMA|RSI|TECHNICAL)\b/i.test(cleanPrompt)) {
-    return coinPrefix ? `${coinPrefix}Technical Trend` : 'Technical Trend Analysis';
-  }
-  if (/\b(MOVER|GAINER|LOSER|TOP|COMPARE)\b/i.test(cleanPrompt)) {
-    return 'Top Market Movers';
-  }
-
-  const words = cleanPrompt.split(/\s+/).filter(Boolean);
-  if (words.length >= 2 && words.length <= 4 && cleanPrompt.length <= 30) {
-    return words.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-  }
-
-  return matchedCoin ? `${matchedCoin} Market Analysis` : 'Market Analysis';
+  const titleWords = cleanedWords.slice(0, 4);
+  return titleWords
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(' ');
 }
 
 /**
@@ -96,7 +75,7 @@ export function extractSessionTitle(
     .trim();
 
   if (!cleanedText && sessionTitle) {
-    cleanedText = `Started a new chat for **${sessionTitle}**. What would you like to explore or research today?`;
+    cleanedText = `Started a new chat for **${sessionTitle}**. What would you like to explore today?`;
   }
 
   return { sessionTitle, cleanedText };

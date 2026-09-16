@@ -65,7 +65,6 @@ export function prepareAgentInvocation(options: AgentOptions): PreparedAgentInvo
     : undefined;
 
   const reasoningEffort =
-    (process.env.BITGET_AI_REASONING_EFFORT as 'high' | 'medium' | 'low' | 'max' | 'default' | 'none') ||
     (process.env.FIREWORKS_REASONING_EFFORT as 'high' | 'medium' | 'low' | 'max' | 'default' | 'none') ||
     'low';
 
