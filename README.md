@@ -11,6 +11,8 @@
 
 Sterling is a fast, high-signal AI research assistant and intelligence desk built with Next.js 16, Vercel AI SDK, and Exa AI neural search.
 
+![Sterling AI Agent Desk](public/images/homescreen.webp)
+
 ---
 
 ## Key Features
