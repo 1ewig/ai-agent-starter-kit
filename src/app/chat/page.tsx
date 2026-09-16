@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import { ChatPageClient } from '@/components/chat-page.client';
 
 export const metadata: Metadata = {
-  title: 'Trading Desk Stage',
+  title: 'Research Workspace',
   description:
-    'Institutional AI chat stage featuring real-time reasoning timelines, pure TypeScript quantitative indicators, and live Bitget V3 market streaming.',
+    'Intelligent AI chat workspace featuring real-time reasoning timelines, deep neural web search, and multi-session persistence.',
   alternates: {
     canonical: '/chat',
   },
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Sterling AI Trading Desk',
-  applicationCategory: 'FinanceApplication',
+  name: 'Sterling AI Assistant',
+  applicationCategory: 'BusinessApplication',
   operatingSystem: 'All',
   offers: {
     '@type': 'Offer',
@@ -23,15 +23,13 @@ const JSON_LD = {
     priceCurrency: 'USD',
   },
   description:
-    'Institutional AI Trading Desk and Cross-Asset Intelligence Workbench for continuous crypto and tokenized US equities trading.',
+    'Intelligent AI Agent and Deep Research Assistant with real-time neural web search and multi-turn reasoning.',
   featureList: [
-    'Sub-50ms Bitget Unified V3 WebSocket Market Streamer',
-    '8-Level L2 Order Book Depth Ladder with Imbalance Models',
-    '30-Minute Quadratic Bézier Micro-Trend SVG Sparklines',
-    '23 Pure TypeScript Quantitative Technical Indicators',
-    'DeFiLlama Multi-Chain TVL & Stablecoin Intelligence',
-    'Exa AI Institutional News & Narrative Briefing',
-    'Human-in-the-Loop Staged Order Execution with HMAC-SHA256 Signing',
+    'Real-time Multi-step Reasoning Timeline',
+    'Exa AI Neural Web Search & Research',
+    'Real-time News Briefings and Catalyst Tracking',
+    'Persistent Multi-session IndexedDB Workspace',
+    'Sleek Dark/Light Adaptive Design System',
   ],
 };
 
@@ -48,4 +46,3 @@ export default function ChatPage() {
     </>
   );
 }
-
