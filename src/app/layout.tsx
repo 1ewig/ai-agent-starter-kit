@@ -27,30 +27,24 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_APP_URL || "https://sterling-desk.vercel.app"
   ),
   title: {
-    default: "Sterling — Institutional AI Trading Desk & Cross-Asset Intelligence Workbench",
-    template: "%s | Sterling AI Desk",
+    default: "Sterling — Intelligent AI Agent & Research Assistant",
+    template: "%s | Sterling AI",
   },
   description:
-    "Institutional-grade AI Trading Desk engineered for 24/7 continuous market perception, sub-50ms Bitget Unified V3 WebSocket streaming, L2 order book depth, 23 pure TypeScript quantitative indicators, and staged trade execution.",
-  applicationName: "Sterling Trading Desk",
-  authors: [{ name: "Sterling Intelligence Desk" }],
+    "High-performance AI research assistant and intelligence agent with real-time neural web search, multi-turn reasoning, and instant responses.",
+  applicationName: "Sterling AI",
+  authors: [{ name: "Sterling AI" }],
   generator: "Next.js",
   keywords: [
-    "AI Trading Desk",
-    "Quantitative Trading",
-    "Crypto Market Streamer",
-    "Bitget V3 WebSocket",
-    "Tokenized Equities",
-    "rTokens",
-    "L2 Order Book",
-    "DeFi TVL Intelligence",
-    "DeFiLlama On-Chain",
-    "Technical Indicator Engine",
-    "Institutional Trading",
-    "Autonomous Agent Desk",
+    "AI Agent",
+    "Deep Research",
+    "Neural Search",
+    "Exa AI",
+    "Reasoning Assistant",
+    "Autonomous Agent",
   ],
-  creator: "Sterling Desk",
-  publisher: "Sterling Desk",
+  creator: "Sterling",
+  publisher: "Sterling",
   formatDetection: {
     email: false,
     address: false,
@@ -63,24 +57,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "Sterling AI Trading Desk",
-    title: "Sterling — Institutional AI Trading Desk & Cross-Asset Intelligence Workbench",
+    siteName: "Sterling AI",
+    title: "Sterling — Intelligent AI Agent & Research Assistant",
     description:
-      "Autonomous 24/7 AI trading workbench with sub-50ms Bitget V3 WebSocket streaming, L2 order books, quantitative indicators, and staged trade execution.",
+      "High-performance AI research assistant with real-time web search, multi-step reasoning, and clean chat workspace.",
     images: [
       {
         url: "/icon.svg",
         width: 512,
         height: 512,
-        alt: "Sterling Institutional AI Trading Desk",
+        alt: "Sterling AI Agent",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sterling — Institutional AI Trading Desk & Cross-Asset Intelligence Workbench",
+    title: "Sterling — Intelligent AI Agent & Research Assistant",
     description:
-      "Autonomous 24/7 AI trading workbench with sub-50ms Bitget V3 WebSocket streaming, L2 order books, quantitative indicators, and staged trade execution.",
+      "High-performance AI research assistant with real-time web search, multi-step reasoning, and clean chat workspace.",
     images: ["/icon.svg"],
   },
   robots: {
@@ -102,7 +96,7 @@ export const metadata: Metadata = {
       { url: "/icon.svg" },
     ],
   },
-  category: "finance",
+  category: "technology",
 };
 
 import { STORAGE_KEYS } from '@/constants/storage';

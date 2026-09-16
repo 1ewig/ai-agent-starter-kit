@@ -6,9 +6,26 @@ import { ChatEmptyState, ChatInput, type QuickActionItem } from './input';
 import { ChatMessageList } from './messages';
 
 const DEFAULT_QUICK_ACTIONS: QuickActionItem[] = [
-  { id: 'etf-flows', label: 'Crypto ETF Flows', template: 'Provide a comprehensive research briefing on recent Bitcoin and Ethereum ETF inflows and institutional demand.' },
-  { id: 'macro-outlook', label: 'Macro & Fed Policy', template: 'Synthesize the latest macroeconomic outlook, Federal Reserve interest rate policy, and global liquidity trends.' },
-  { id: 'tech-ai-narrative', label: 'AI & Tech Catalysts', template: 'What are the major breaking market catalysts and technological developments shaping tech equities and digital assets this week?' },
+  {
+    id: 'ai-research',
+    label: 'AI & Tech Research',
+    template: 'Provide a comprehensive research briefing on the latest breakthroughs in AI agents and reasoning models.',
+  },
+  {
+    id: 'market-intel',
+    label: 'Market & Macro Trends',
+    template: 'Summarize the key global economic events, interest rate outlook, and tech market catalysts this week.',
+  },
+  {
+    id: 'system-design',
+    label: 'Architecture & Code',
+    template: 'Explain best practices and architectural patterns for building high-performance, real-time web applications.',
+  },
+  {
+    id: 'explain-concept',
+    label: 'Explain a Concept',
+    template: 'Explain how distributed consensus mechanisms work in intuitive, real-world analogies.',
+  },
 ];
 
 /**

@@ -70,7 +70,7 @@ export const ChatEmptyState = memo(function ChatEmptyState({
             variants={emptyStateTextVariants}
             className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-theme-text-primary tracking-tight font-sans leading-tight"
           >
-            What are we researching today?
+            How can I help you today?
           </motion.h2>
 
           {/* Subtitle */}
@@ -78,7 +78,7 @@ export const ChatEmptyState = memo(function ChatEmptyState({
             variants={emptyStateTextVariants}
             className="text-xs sm:text-sm text-theme-text-secondary mt-2 max-w-lg leading-relaxed font-normal"
           >
-            Real-time market intelligence, news catalysts, and deep web research powered by AI.
+            Ask questions, conduct deep web research, analyze topics, or brainstorm ideas.
           </motion.p>
         </div>
 
@@ -110,7 +110,7 @@ export const ChatEmptyState = memo(function ChatEmptyState({
             className="flex items-center justify-center mb-0.5"
           >
             <span className="text-2xs font-bold uppercase tracking-wider text-theme-text-muted">
-              Quick Research
+              Suggestions
             </span>
           </motion.div>
           <div className="flex flex-wrap items-center justify-center gap-2 max-w-xl">

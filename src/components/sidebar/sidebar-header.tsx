@@ -53,7 +53,7 @@ export const SidebarHeader = memo(function SidebarHeader({ isCollapsed, onToggle
             Sterling
           </span>
           <span className="text-2xs font-semibold text-theme-text-muted leading-tight mt-0.5">
-            AI Trading Desk
+            AI Assistant
           </span>
         </motion.div>
 
