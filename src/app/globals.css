@@ -50,23 +50,23 @@
   --navbar-height: 3.5rem; /* 56px - Architectural top navigation bar height */
 }
 
-/* Light Theme Overrides (Clean Minimal Snow) */
+/* Light Theme Overrides (Nordic Opal & Electric Cerulean) */
 html.light {
-  --theme-bg-base: #fafafa;             /* Clean snow canvas */
-  --theme-bg-surface: #ffffff;          /* Crisp card containers & deck surfaces */
-  --theme-bg-elevated: #f4f4f5;         /* Soft secondary controls, chips, tabs & hover */
-  --theme-bg-overlay: #09090b;          /* Deep pitch high-contrast focus cards & docks */
-  --theme-border-subtle: #e4e4e7;       /* Subtle hairline micro-dividers & borders */
-  --theme-border-strong: #d4d4d8;       /* Focused active borders & indicators */
-  --theme-text-primary: #09090b;        /* Pure slate dark for display headings */
-  --theme-text-secondary: #52525b;      /* Refined neutral zinc for subtitles & labels */
-  --theme-text-muted: #a1a1aa;          /* Legible slate for timestamps & micro-details */
-  --theme-brand-primary: #00a3b4;       /* Primary cyan accent */
-  --theme-brand-accent: #00c4d6;        /* Aqua for active meters & hover highlights */
-  --theme-status-success: #10b981;      /* Emerald green for positive status */
-  --theme-status-danger: #f43f5e;       /* Crimson for errors & risk triggers */
+  --theme-bg-base: #f8fafc;             /* Luminous slate alabaster canvas */
+  --theme-bg-surface: #ffffff;          /* Pure porcelain white card & deck surfaces */
+  --theme-bg-elevated: #f1f5f9;         /* Soft mist interactive controls, chips & tabs */
+  --theme-bg-overlay: #090d16;          /* Deep pitch high-contrast focus cards & modal scrims */
+  --theme-border-subtle: #e2e8f0;       /* Silky slate hairline micro-dividers & borders */
+  --theme-border-strong: #cbd5e1;       /* Focused active borders & tactile indicators */
+  --theme-text-primary: #0f172a;        /* Deep obsidian ink for display headings & stats */
+  --theme-text-secondary: #475569;      /* Polished slate steel for subtitles & labels */
+  --theme-text-muted: #94a3b8;          /* Refined cool slate for timestamps & micro-details */
+  --theme-brand-primary: #0284c7;       /* Electric Cerulean primary accent */
+  --theme-brand-accent: #06b6d4;        /* Vibrant aqua for active meters & hover highlights */
+  --theme-status-success: #10b981;      /* Crisp status emerald */
+  --theme-status-danger: #f43f5e;       /* Crisp status crimson-rose */
   --theme-status-warning: #f59e0b;      /* Warm amber for warnings & caution alerts */
-  --theme-status-info: #0284c7;         /* Clean technical cyan for analyst stream */
+  --theme-status-info: #0284c7;         /* Clean technical cerulean for analyst stream */
 }
 
 @theme inline {
