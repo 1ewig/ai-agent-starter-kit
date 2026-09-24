@@ -8,9 +8,9 @@ export interface ExtractedFollowUpsResult {
 }
 
 const FALLBACK_FOLLOW_UPS = [
-  'Explore this topic in greater detail',
-  'Provide practical code or architecture examples',
-  'Summarize the core takeaways and next steps',
+  'Show me the key takeaways and next steps',
+  'Go deeper on the most important point',
+  'Give me a practical example I can use',
 ];
 
 /**
