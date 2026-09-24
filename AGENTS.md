@@ -12,6 +12,7 @@ Core rules for AI coding agents working in this repository:
 ### 2. Bun Runtime & Package Management
 * **Bun Only (`bun@1.4.0+`):** Never run or suggest `npm`, `pnpm`, `yarn`, or `npx`.
 * Use Bun equivalents: `bun add <pkg>`, `bun run dev`, `bun run build`, `bun run lint`, `bun x tsc --noEmit`, `bun x oxlint`.
+* **Hoisted Linker Required:** Keep `bunfig.toml` set to `[install] linker = "hoisted"`. Never switch to the isolated linker — Bun 1.4's isolated virtual store (junctions under `node_modules/.bun/`) breaks Turbopack module resolution on Windows and can strip `package.json` from native packages (e.g. `lightningcss-win32-x64-msvc`).
 
 ---
 

@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["harmonics-paternity-blighted.ngrok-free.dev"],
   transpilePackages: ["shiki"],
   turbopack: {
-    root: path.resolve(process.env.USERPROFILE || __dirname),
+    root: path.resolve(__dirname),
   },
 };
 
